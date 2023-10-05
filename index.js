@@ -1,4 +1,5 @@
 const express = require("express");
+const { parse } = require("uuid");
 const { v4: uuidv4 } = require("uuid");
 
 const app = express();
@@ -53,6 +54,48 @@ app.get("/receipts/:id/points", (req, res) => {
 
   res.json({ points: receipts[id].points });
 });
+
+function calculatePoints(receipt) {
+  let points = 0;
+
+  // One point for every alphanumeric character in the retailer name
+  points += receipt.retailer.replace(/[^0-9a-z]/gi, "").length;
+
+  // 50 points if the total is a round total amount with no cents
+  if (parseFloat(receipt.total) === Math.floor(parseFloat(receipt.total))) {
+    points += 50;
+  }
+
+  // 25 points if the total is a multiple of 0.25
+  if (parseFloat(receipt.total) % 0.25 === 0) {
+    points += 25;
+  }
+
+  // 5 points for every two items on the receipt
+  points += Math.floor(receipt.items.length / 2) * 5;
+
+  // If the trimmed length of the item description is a multiple of 3, multiply the price by `0.2` and round up to the nearest integer. The result is the number of points earned
+  receipt.items.forEach((item) => {
+    if (item.shortDescription.trim().length % 3 === 0) {
+      points += Math.ceil(parseFloat(item.price) * 0.2);
+    }
+  });
+
+  // 6 points if the day in the purchase date is odd
+  const day = new Date(receipt.purchaseDate).getDate();
+  if (day % 2 === 1) {
+    points += 6;
+  }
+
+  // 10 points if the the time of purchase is after 2:00pm and before 4:00pm
+  const purchaseTime = receipt.purchaseTime.split(":");
+  const hours = parseInt(purchaseTime[0]);
+  if (hours >= 14 && hours < 16) {
+    points += 10;
+  }
+
+  return points;
+}
 
 const PORT = 8080;
 app.listen(PORT, () => {
