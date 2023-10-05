@@ -1,3 +1,109 @@
+# Receipt Processor - Yosyp Dobosh
+
+Thank you for taking the time to review my submission. This document will guide you through the setup and execution of the Receipt Processor developed using Node.js and Express.
+
+## Table of Contents
+
+- [Introduction](#introduction)
+- [Environment Setup Guide for Node.js](#environment-setup-guide-for-nodejs)
+  - [Prerequisites](#prerequisites)
+  - [Installation Steps](#installation-steps)
+- [Running the Application](#running-the-application)
+
+## Introduction
+
+I've chosen Node.js and Express for this task due to the rapid development capabilities they offer for building web services. Node.js enables server-side JavaScript execution, while Express is a minimalist framework for Node.js, facilitating quick API development. I utilized Postman during the development phase for testing.
+
+## Environment Setup Guide for Node.js
+
+### Prerequisites
+
+1. A computer with a modern OS (Windows, MacOS, Linux).
+2. Administrative or superuser rights for software installation.
+3. Stable internet connection.
+
+### Installation Steps
+
+#### 1. **Download Node.js Installer**:
+
+- Visit [Node.js Downloads](https://nodejs.org/en/download/)
+- Choose the LTS (Long Term Support) version or based on your OS.
+
+#### 2. **Install Node.js**:
+
+- **Windows:** 
+  - Execute the downloaded installer.
+  - Use default settings (ensure `npm` installation is selected).
+  
+- **MacOS:**
+  - Open the `.pkg` file and follow instructions.
+
+- **Linux:** For Ubuntu/Debian:
+  ```bash
+  sudo apt-get update
+  sudo apt-get install nodejs
+  sudo apt-get install npm
+  ```
+
+#### 3. **Verify Installation**:
+
+Open a terminal or command prompt:
+
+```bash
+node -v
+npm -v
+```
+
+You should see version numbers for both Node.js and npm.
+
+Certainly! If you have a `npm run dev` command, it's likely set up to run the application in a development mode (often using tools like `nodemon` for automatic restarts on changes). It would be a good idea to mention this in your README, especially if it's the preferred way to run the application during development.
+
+Let's update the **Running the Application** section with this additional step:
+
+---
+
+## Running the Application
+
+1. **Clone & Navigate**:
+
+   Assuming the project repository is cloned:
+
+   ```bash
+   cd path/to/receipt-processor-challenge-main
+   ```
+
+2. **Install Dependencies**:
+
+   Inside the project directory:
+
+   ```bash
+   npm install
+   ```
+
+3. **Start in Development Mode**:
+
+   To run the application in development mode:
+
+   ```bash
+   npm run dev
+   ```
+
+   This will launch the application with enhanced development features, such as live-reloading upon code changes.
+
+4. **Start in Production Mode**:
+
+   For a standard run (suitable for production or testing):
+
+   ```bash
+   npm start
+   ```
+
+Your server should now be running. Refer to the provided API documentation for endpoint details.
+
+
+
+
+
 # Receipt Processor
 
 Build a webservice that fulfils the documented API. The API is described below. A formal definition is provided 
