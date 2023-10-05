@@ -81,23 +81,23 @@ function calculatePoints(receipt) {
 
   // One point for every alphanumeric character in the retailer name
   points += receipt.retailer.replace(/[^0-9a-z]/gi, "").length;
-  console.log("Points after retailer:", points);
+  // console.log("Points after retailer:", points);
 
   // 50 points if the total is a round total amount with no cents
   if (parseFloat(receipt.total) === Math.floor(parseFloat(receipt.total))) {
     points += 50;
   }
-  console.log("Points after round total check:", points);
+  // console.log("Points after round total check:", points);
 
   // 25 points if the total is a multiple of 0.25
   if ((parseFloat(receipt.total) * 100) % 25 === 0) {
     points += 25;
   }
-  console.log("Points after 0.25 multiple check:", points);
+  // console.log("Points after 0.25 multiple check:", points);
 
   // 5 points for every two items on the receipt
   points += Math.floor(receipt.items.length / 2) * 5;
-  console.log("Points after items count:", points);
+  // console.log("Points after items count:", points);
 
   // If the trimmed length of the item description is a multiple of 3
   receipt.items.forEach((item) => {
@@ -105,14 +105,14 @@ function calculatePoints(receipt) {
       points += Math.ceil(parseFloat(item.price) * 0.2);
     }
   });
-  console.log("Points after item description check:", points);
+  // console.log("Points after item description check:", points);
 
   // 6 points if the day in the purchase date is odd
   const day = new Date(receipt.purchaseDate).getUTCDate();
   if (day % 2 === 1) {
     points += 6;
   }
-  console.log("Points after date check:", points);
+  // console.log("Points after date check:", points);
 
   // 10 points if the the time of purchase is after 2:00pm and before 4:00pm
   const purchaseTime = receipt.purchaseTime.split(":");
@@ -120,8 +120,7 @@ function calculatePoints(receipt) {
   if (hours >= 14 && hours < 16) {
     points += 10;
   }
-  console.log("Points after time check:", points);
-
+  // console.log("Points after time check:", points);
   return points;
 }
 
