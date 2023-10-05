@@ -1,9 +1,42 @@
 const express = require("express");
+const { v4: uuidv4 } = require("uuid");
+
 const app = express();
 
+app.use(express.json());
+
+// In-memory storage for the receipts and their points
+let receipts = {};
+
 app.get("/", (req, res) => {
-  res.send("HReceipt Processor Service");
+  res.send("Receipt Processor Service");
 });
+
+// POST endpoint for /receipts/process
+app.post("/receipts/process", (req, res) => {
+  const receipt = req.body;
+
+  // Validate the receipt
+  if (!receipt.retailer || !receipt.purchaseDate || !receipt.items || !receipt.total) {
+    res.status(400).json({ error: "Invalid receipt data" });
+    return;
+  }
+
+  // Generate a unique ID for the receipt
+  const id = uuidv4();
+
+  // Calculate the points 
+  const points = calculatePoints(receipt);
+
+  // Store the receipt and its points
+  receipts[id] = {
+    data: receipt,
+    points: points,
+  };
+
+  res.json({ id: id });
+});
+
 
 const PORT = 8080;
 app.listen(PORT, () => {
