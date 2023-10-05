@@ -56,12 +56,6 @@ npm -v
 
 You should see version numbers for both Node.js and npm.
 
-Certainly! If you have a `npm run dev` command, it's likely set up to run the application in a development mode (often using tools like `nodemon` for automatic restarts on changes). It would be a good idea to mention this in your README, especially if it's the preferred way to run the application during development.
-
-Let's update the **Running the Application** section with this additional step:
-
----
-
 ## Running the Application
 
 1. **Clone & Navigate**:
